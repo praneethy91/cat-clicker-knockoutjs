@@ -17,23 +17,21 @@ var Cat = function(){
     this.levelHeader = ko.computed(function(){
         return 'Thie level of cat is: ' + this.catLevel();
     }, this);
-};
-
-
-var ViewModel = function(){
-
-    this.currentCat = ko.observable(new Cat());
-
     this.onCatClick = function(){
-        this.currentCat().catClicks(this.currentCat().catClicks() + 1);
+        this.catClicks(this.catClicks() + 1);
 
         /* Circles from start to end of levels and back to first level,
          * level increase every 10 clicks.
          */
-        this.currentCat().catLevel(this.currentCat().levels[
-            Math.floor(this.currentCat().catClicks()/10)
-            % this.currentCat().levels.length]);
+        this.catLevel(this.levels[
+            Math.floor(this.catClicks()/10)
+            % this.levels.length]);
     }
+};
+
+
+var ViewModel = function(){
+    this.currentCat = ko.observable(new Cat());
 }
 
 ko.applyBindings(new ViewModel());
