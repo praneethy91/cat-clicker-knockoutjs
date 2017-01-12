@@ -1,10 +1,8 @@
-/* The various levels the cat can be in */
-var levels = ['newborn', 'infant', 'teen', 'young adult', 'mature adult', 'old', 'dead'];
-
-var ViewModel = function(){
+var Cat = function(){
     this.catName = ko.observable('Becky');
     this.catClicks = ko.observable(0);
-    this.catLevel = ko.observable(levels[0]);
+    this.levels = ['newborn', 'infant', 'teen', 'young adult', 'mature adult', 'old', 'dead'];
+    this.catLevel = ko.observable(this.levels[0]);
     this.catImage = ko.observable('img/cat.jpg');
     this.nickNames = ko.observable([
         'Jany',
@@ -19,14 +17,22 @@ var ViewModel = function(){
     this.levelHeader = ko.computed(function(){
         return 'Thie level of cat is: ' + this.catLevel();
     }, this);
+};
+
+
+var ViewModel = function(){
+
+    this.currentCat = ko.observable(new Cat());
 
     this.onCatClick = function(){
-        this.catClicks(this.catClicks() + 1);
+        this.currentCat().catClicks(this.currentCat().catClicks() + 1);
 
         /* Circles from start to end of levels and back to first level,
          * level increase every 10 clicks.
          */
-        this.catLevel(levels[Math.floor(this.catClicks()/10) % levels.length]);
+        this.currentCat().catLevel(this.currentCat().levels[
+            Math.floor(this.currentCat().catClicks()/10)
+            % this.currentCat().levels.length]);
     }
 }
 

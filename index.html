@@ -8,11 +8,11 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h1 data-bind="text: catName"></h1>
-        <p data-bind="text: catClicksHeader"></p>
-        <p data-bind="text: levelHeader"></p>
-        <img src="" alt="" data-bind="click: onCatClick, attr: { src: catImage }">
-        <ol data-bind="foreach: nickNames">
+        <h1 data-bind="text: currentCat().catName"></h1>
+        <p data-bind="text: currentCat().catClicksHeader"></p>
+        <p data-bind="text: currentCat().levelHeader"></p>
+        <img src="" alt="" data-bind="click: onCatClick, attr: { src: currentCat().catImage }">
+        <ol data-bind="foreach: currentCat().nickNames">
             <li data-bind="text: $data"></li>
         </ol>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
