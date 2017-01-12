@@ -11,7 +11,7 @@
         <h1 data-bind="text: catName"></h1>
         <p data-bind="text: catClicksHeader"></p>
         <p data-bind="text: levelHeader"></p>
-        <img src="" alt="" data-bind="click: onCatClick, attr: { src: catImage }">
+        <img src="" alt="" data-bind="click: $parent.onCatClick, attr: { src: catImage }">
         <ol data-bind="foreach: nickNames">
             <li data-bind="text: $data"></li>
         </ol>

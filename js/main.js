@@ -17,6 +17,13 @@ var Cat = function(){
     this.levelHeader = ko.computed(function(){
         return 'Thie level of cat is: ' + this.catLevel();
     }, this);
+};
+
+
+var ViewModel = function(){
+
+    this.currentCat = ko.observable(new Cat());
+
     this.onCatClick = function(){
         this.catClicks(this.catClicks() + 1);
 
@@ -27,11 +34,6 @@ var Cat = function(){
             Math.floor(this.catClicks()/10)
             % this.levels.length]);
     }
-};
-
-
-var ViewModel = function(){
-    this.currentCat = ko.observable(new Cat());
 }
 
 ko.applyBindings(new ViewModel());
