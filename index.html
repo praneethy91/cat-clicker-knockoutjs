@@ -7,14 +7,19 @@
         <title>Cat Clicker</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body data-bind="with: currentCat">
-        <h1 data-bind="text: catName"></h1>
-        <p data-bind="text: catClicksHeader"></p>
-        <p data-bind="text: levelHeader"></p>
-        <img src="" alt="" data-bind="click: $parent.onCatClick, attr: { src: catImage }">
-        <ol data-bind="foreach: nickNames">
-            <li data-bind="text: $data"></li>
-        </ol>
+    <body>
+        <ul data-bind="foreach: allCats">
+            <li data-bind="text: catName, click: $parent.onCatListClick"></li>
+        </ul>
+        <div data-bind="with: currentCat">
+            <h1 data-bind="text: catName"></h1>
+            <p data-bind="text: catClicksHeader"></p>
+            <p data-bind="text: levelHeader"></p>
+            <img src="" alt="" data-bind="click: $parent.onCatClick, attr: { src: catImage }">
+            <ol data-bind="foreach: nickNames">
+                <li data-bind="text: $data"></li>
+            </ol>
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
         <script src="js/main.js"></script>
     </body>

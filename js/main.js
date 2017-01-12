@@ -1,3 +1,37 @@
+var catData = [{
+        catName: 'Becky',
+        catClicks: 0,
+        catImage: 'img/cat.jpg',
+        nickNames: [
+            'Jany',
+            'Sammy',
+            'Rocky',
+            'Jess'
+        ]
+    },
+    {
+        catName: 'Smarty',
+        catClicks: 0,
+        catImage: 'img/cat2.jpg',
+        nickNames: [
+            'July',
+            'May',
+            'April',
+            'June'
+        ]
+    },
+    {
+        catName: 'Tardy',
+        catClicks: 0,
+        catImage: 'img/cat3.jpg',
+        nickNames: [
+            'Sleepy',
+            'Bored',
+            'zzzzz',
+            'lethargic'
+        ]
+}];
+
 var Cat = function(data){
     this.catName = ko.observable(data.catName);
     this.catClicks = ko.observable(data.catClicks);
@@ -14,25 +48,18 @@ var Cat = function(data){
     }, this);
 };
 
-
 var ViewModel = function(){
     var self = this;
 
-    var catData = {
-        catName: 'Becky',
-        catClicks: 0,
-        catImage: 'img/cat.jpg',
-        nickNames: [
-            'Jany',
-            'Sammy',
-            'Rocky',
-            'Jess'
-        ]
-    };
+    this.allCats = ko.observableArray([]);
 
-    self.currentCat = ko.observable(new Cat(catData));
+    catData.forEach(function(s){
+        self.allCats.push(new Cat(s));
+    });
 
-    self.onCatClick = function(){
+    this.currentCat = ko.observable(this.allCats()[0]);
+
+    this.onCatClick = function(){
         self.currentCat().catClicks(self.currentCat().catClicks() + 1);
 
         /* Circles from start to end of levels and back to first level,
@@ -41,6 +68,10 @@ var ViewModel = function(){
         self.currentCat().catLevel(self.currentCat().levels[
             Math.floor(self.currentCat().catClicks()/10)
             % self.currentCat().levels.length]);
+    }
+
+    this.onCatListClick = function(clickedCat){
+        self.currentCat(clickedCat);
     }
 }
 
