@@ -21,18 +21,18 @@ var Cat = function(){
 
 
 var ViewModel = function(){
+    var self = this;
+    self.currentCat = ko.observable(new Cat());
 
-    this.currentCat = ko.observable(new Cat());
-
-    this.onCatClick = function(){
-        this.catClicks(this.catClicks() + 1);
+    self.onCatClick = function(){
+        self.currentCat().catClicks(self.currentCat().catClicks() + 1);
 
         /* Circles from start to end of levels and back to first level,
          * level increase every 10 clicks.
          */
-        this.catLevel(this.levels[
-            Math.floor(this.catClicks()/10)
-            % this.levels.length]);
+        self.currentCat().catLevel(self.currentCat().levels[
+            Math.floor(self.currentCat().catClicks()/10)
+            % self.currentCat().levels.length]);
     }
 }
 
