@@ -6,6 +6,12 @@ var ViewModel = function(){
     this.catClicks = ko.observable(0);
     this.catLevel = ko.observable(levels[0]);
     this.catImage = ko.observable('img/cat.jpg');
+    this.nickNames = ko.observable([
+        'Jany',
+        'Sammy',
+        'Rocky',
+        'Jess'
+    ]);
 
     this.catClicksHeader = ko.computed(function(){
         return 'The number of clicks is: ' +  this.catClicks();
