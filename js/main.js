@@ -1,15 +1,10 @@
-var Cat = function(){
-    this.catName = ko.observable('Becky');
-    this.catClicks = ko.observable(0);
+var Cat = function(data){
+    this.catName = ko.observable(data.catName);
+    this.catClicks = ko.observable(data.catClicks);
     this.levels = ['newborn', 'infant', 'teen', 'young adult', 'mature adult', 'old', 'dead'];
     this.catLevel = ko.observable(this.levels[0]);
-    this.catImage = ko.observable('img/cat.jpg');
-    this.nickNames = ko.observable([
-        'Jany',
-        'Sammy',
-        'Rocky',
-        'Jess'
-    ]);
+    this.catImage = ko.observable(data.catImage);
+    this.nickNames = ko.observable(data.nickNames);
 
     this.catClicksHeader = ko.computed(function(){
         return 'The number of clicks is: ' +  this.catClicks();
@@ -22,7 +17,20 @@ var Cat = function(){
 
 var ViewModel = function(){
     var self = this;
-    self.currentCat = ko.observable(new Cat());
+
+    var catData = {
+        catName: 'Becky',
+        catClicks: 0,
+        catImage: 'img/cat.jpg',
+        nickNames: [
+            'Jany',
+            'Sammy',
+            'Rocky',
+            'Jess'
+        ]
+    };
+
+    self.currentCat = ko.observable(new Cat(catData));
 
     self.onCatClick = function(){
         self.currentCat().catClicks(self.currentCat().catClicks() + 1);
